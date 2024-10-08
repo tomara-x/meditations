@@ -1,0 +1,3 @@
+```
+cargo r --bin <name>
+```
