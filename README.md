@@ -1,3 +1,3 @@
 ```
-cargo r --bin <name>
+cargo r --release --bin <name>
 ```
