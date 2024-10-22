@@ -43,3 +43,13 @@ for i in 0..16 {
     s, s+beat/2, Fade::Smooth, 0.01, 0.01, sine_hz(hz)
   );
 }
+
+let x = true;
+"a" = {
+	if x {
+		"x" = {32;};
+	} else {
+		"x" = {};
+	}
+	x = !x;
+};
