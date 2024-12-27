@@ -39,3 +39,13 @@ seq.push_relative(
     0, 0.4, Fade::Smooth, 0.01, 0.01,
     sine_hz(f)
 );
+
+let xm = 0;
+let ym = 0;
+let zm = 0;
+let t = [0, 1, 2, 3, 5, 3, 7, 2];
+let x = [0, 0, 0, 0, 0, 0, 0, 0];
+let y = [0, 0, 0, 0, 0, 0, 0, 0];
+let z = [0, 0, 0, 0, 0, 0, 0, 0];
+let s = 0;
+n = t[s] + x[s] * xm + y[s] * ym + z[s] * zm;
