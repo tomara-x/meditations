@@ -20,7 +20,7 @@ let mode_5 = [0,6,7,13,19,25];
 let mode_6 = [0,1,7,13,19,25];
 let mothra11 = [0,1,6,7,12,13,18,19,24,25,30];
 
-let scale = nmin.clone();
+let scale = nmin;
 let slen = scale.len();
 
 let seq = Sequencer::new(false, 1);
@@ -28,17 +28,6 @@ let be = seq.backend();
 let verb = reverb_stereo(20, 3, 0.4);
 let g = be >> split::<U2>() >> verb;
 g.play();
-
-let n = 0;
-
-let note = (scale[n%slen] + NOTE_OFFSET)/12;
-let oct = (n/slen).floor() % MAX_OCT + OCT_OFFSET;
-let f = midc * exp2(note) * exp2(oct);
-
-seq.push_relative(
-    0, 0.4, Fade::Smooth, 0.01, 0.01,
-    sine_hz(f)
-);
 
 let xm = 0;
 let ym = 0;
@@ -48,4 +37,15 @@ let x = [0, 0, 0, 0, 0, 0, 0, 0];
 let y = [0, 0, 0, 0, 0, 0, 0, 0];
 let z = [0, 0, 0, 0, 0, 0, 0, 0];
 let s = 0;
+let n = 0;
+s = (s + 1) % slen;
 n = t[s] + x[s] * xm + y[s] * ym + z[s] * zm;
+
+let note = (scale[n%slen] + NOTE_OFFSET)/12;
+let oct = (n/slen).floor() % MAX_OCT + OCT_OFFSET;
+let f = midc * exp2(note) * exp2(oct);
+
+seq.push_relative(
+    0, 0.4, Fade::Smooth, 0.01, 0.01,
+    sine_hz(f)
+);
