@@ -29,13 +29,10 @@ let verb = reverb_stereo(20, 3, 0.4);
 let g = be >> split::<U2>() >> verb;
 g.play();
 
-let xm = 0;
-let ym = 0;
-let zm = 0;
 let t = [0, 1, 2, 3, 5, 3, 7, 2];
-let x = [0, 0, 0, 0, 0, 0, 0, 0];
-let y = [0, 0, 0, 0, 0, 0, 0, 0];
-let z = [0, 0, 0, 0, 0, 0, 0, 0];
+let x = [0, 0, 0, 0, 0, 0, 0, 0]; let xm = 0;
+let y = [0, 0, 0, 0, 0, 0, 0, 0]; let ym = 0;
+let z = [0, 0, 0, 0, 0, 0, 0, 0]; let zm = 0;
 let s = 0;
 let n = 0;
 s = (s + 1) % slen;
@@ -43,7 +40,7 @@ n = t[s] + x[s] * xm + y[s] * ym + z[s] * zm;
 
 let note = (scale[n%slen] + NOTE_OFFSET)/12;
 let oct = (n/slen).floor() % MAX_OCT + OCT_OFFSET;
-let f = midc * exp2(note) * exp2(oct);
+let f = midc * exp2(note + oct);
 
 seq.push_relative(
     0, 0.4, Fade::Smooth, 0.01, 0.01,
