@@ -46,3 +46,29 @@ seq.push_relative(
     0, 0.4, Fade::Smooth, 0.01, 0.01,
     sine_hz(f)
 );
+
+// 250112
+let midc = 440 * exp2(-9/12);
+let scale = [0,2,3,5,7,8,10];
+let slen = scale.len();
+let seq = Sequencer::new(false, 1);
+let be = seq.backend();
+let verb = reverb_stereo(40, 3, 0.4);
+let limit = limiter(0.1, 0.1);
+let g = be >> limit >> pan(0) >> verb;
+g.play();
+let t = [0, 6, 5, 3, 5, 14, 7, 2];
+let n = 0;
+
+let l = ($other.layer + 3) % 8;
+$id.layer(l).h($other.h).vx(0).vy(0).va(0);
+
+n = t[$other.layer];
+let note = (scale[n%slen] + 0)/12;
+let oct = (n/slen).floor() % 4 - 2;
+let f = midc * exp2(note + oct);
+
+seq.push_relative(
+    0, 0.2, Fade::Smooth, 0.01, 0.01,
+    organ_hz(f)
+);
