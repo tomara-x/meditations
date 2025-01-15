@@ -53,7 +53,7 @@ let scale = [0,2,3,5,7,8,10];
 let slen = scale.len();
 let seq = Sequencer::new(false, 1);
 let be = seq.backend();
-let verb = reverb_stereo(40, 3, 0.4);
+let verb = multipass::<U2>() & reverb_stereo(40, 3, 0.4);
 let limit = limiter(0.1, 0.1);
 let g = be >> limit >> pan(0) >> verb;
 g.play();
