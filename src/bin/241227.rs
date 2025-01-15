@@ -72,3 +72,22 @@ seq.push_relative(
     0, 0.2, Fade::Smooth, 0.01, 0.01,
     organ_hz(f)
 );
+
+// 250115
+let t = [0, 6, 8, 16, 5, 14, 7, 2];
+let seed = 0;
+t = [4, 1, 2, 3, 5, 14, 19, 13];
+// code_i
+seed += 1;
+let l = rnd1(seed) * 8;
+$id.layer(l).h($other.h);
+n = t[$other.layer];
+let note = (scale[n%slen] + 0)/12;
+let oct = (n/slen).floor() % 2 +  2;
+let f = midc * exp2(note + oct);
+seq.push_relative(
+    0, 0.7, Fade::Smooth, 0, 0.01,
+    brown() >> pluck(f, 14.7, 0.4)*0.4
+);
+// code_f
+$id.vx(0).vy(0);
