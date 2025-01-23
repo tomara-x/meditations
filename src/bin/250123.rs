@@ -104,3 +104,15 @@ seq.push_relative(
     0, 0.7, Fade::Smooth, 0, 0.01,
     ((sine_hz(4) * $id.rot + dc(f)) >> sine())*0.4
 );").code_f("$id.vx(0).vy(0);");
+
+// mara?
+// disable attraction
+
+let step = 0;
+let _ = spawn(2).x(63.90123).y(270).ry(2).rot(-0).mass(0).inertia(10).vx(0).vy(0).va(0).restitution(0.5).lindamp(0).angdamp(0).h(330).s(1).l(0.5).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(false).sensor(true).links("").code_i("step = (step + 10)%160;").code_f("");
+let _ = spawn(13).x(50).y(270).ry(13).rot(1.3952327).mass(0).inertia(1).vx(0).vy(0).va(1.5707964).restitution(0.5).lindamp(0).angdamp(0).h(276).s(1).l(0.5).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(true).sensor(false).links("va < TAU/4").code_i("").code_f("");
+let _ = spawn(1).x(90).y(237.81296).ry(1).rot(-0).mass(0).inertia(1).vx(0).vy(0).va(0).restitution(0.5).lindamp(0).angdamp(0).h(200).s(1).l(0.5).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(true).sensor(false).links("x < step").code_i("").code_f("");
+
+for i in 0..16 {
+let _ = spawn(2).x(i*10).y(235.99106).ry(2).rot(-0).mass(0).inertia(1).vx(0).vy(0).va(0).restitution(0.5).lindamp(0).angdamp(0).h(27.529411).s(1).l(0.5).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(false).sensor(true).links("").code_i("$id.l(1.5);").code_f("$id.l(0.5);");
+}
