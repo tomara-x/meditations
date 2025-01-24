@@ -73,6 +73,16 @@ seq.push_relative(
     organ_hz(f)
 );
 
+// 250124
+let step = 0;
+let _ = spawn(2).x(63.90123).y(270).ry(2).rot(-0).mass(0).inertia(10).vx(0).vy(0).va(0).restitution(0.5).lindamp(0).angdamp(0).h(200).s(1).l(0.5).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(false).sensor(true).links("").code_i("step = (step + 10)%160;").code_f("");
+let _ = spawn(13).x(50).y(270).ry(13).rot(1.3952327).mass(0).inertia(1).vx(0).vy(0).va(1.5707964).restitution(0.5).lindamp(0).angdamp(0).h(330).s(1).l(0.5).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(true).sensor(false).links("va < TAU/4").code_i("").code_f("");
+let _ = spawn(1).x(90).y(237.81296).ry(1).rot(-0).mass(0).inertia(1).vx(0).vy(0).va(0).restitution(0.5).lindamp(0).angdamp(0).h(0).s(1).l(1).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(true).sensor(false).links("x < step").code_i("$other.l($other.l+0.3)").code_f("$other.l($other.l-0.3)");
+
+for i in 0..16 {
+let _ = spawn(2).x(i*10).y(235.99106).ry(2).rot(-0).mass(0).inertia(1).vx(0).vy(0).va(0).restitution(0.5).lindamp(0).angdamp(0).h(i/16*360).s(1).l(0.2).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(false).sensor(true).links("").code_i("").code_f("");
+}
+
 // 250115
 let t = [0, 6, 8, 16, 5, 14, 7, 2];
 let seed = 0;
