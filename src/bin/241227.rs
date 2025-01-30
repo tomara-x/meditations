@@ -25,8 +25,11 @@ let slen = scale.len();
 
 let seq = Sequencer::new(false, 1);
 let be = seq.backend();
-let verb = reverb_stereo(20, 3, 0.4);
-let g = be >> split::<U2>() >> verb;
+let clean = dcblock();
+let filter = (pass() | dc(1729) | dc(1)) >> lowpass();
+let verb = (pass() | pass()) & reverb_stereo(40, 3, 0.4);
+let limit = limiter(0.1, 0.1);
+let g = be >> clean >> filter >> limit >> pan(0) >> verb;
 g.play();
 
 let t = [0, 1, 2, 3, 5, 3, 7, 2];
@@ -42,65 +45,22 @@ let note = (scale[n%slen] + NOTE_OFFSET)/12;
 let oct = (n/slen).floor() % MAX_OCT + OCT_OFFSET;
 let f = midc * exp2(note + oct);
 
+let f = midc * exp2(note/12 + oct);
+
 seq.push_relative(
     0, 0.4, Fade::Smooth, 0.01, 0.01,
     sine_hz(f)
 );
 
-// 250112
-let midc = 440 * exp2(-9/12);
-let scale = [0,2,3,5,7,8,10];
-let slen = scale.len();
-let seq = Sequencer::new(false, 1);
-let be = seq.backend();
-let verb = (pass() | pass()) & reverb_stereo(40, 3, 0.4);
-let limit = limiter(0.1, 0.1);
-let g = be >> limit >> pan(0) >> verb;
-g.play();
-let t = [0, 6, 5, 3, 5, 14, 7, 2];
-let n = 0;
-
-let l = ($other.layer + 3) % 8;
-$id.layer(l).h($other.h).vx(0).vy(0).va(0);
-
-n = t[$other.layer];
-let note = (scale[n%slen] + 0)/12;
-let oct = (n/slen).floor() % 4 - 2;
-let f = midc * exp2(note + oct);
-
-seq.push_relative(
-    0, 0.2, Fade::Smooth, 0.01, 0.01,
-    organ_hz(f)
-);
-
 // 250124
 let step = 0;
-let _ = spawn(2).x(63.90123).y(270).ry(2).rot(-0).mass(0).inertia(10).vx(0).vy(0).va(0).restitution(0.5).lindamp(0).angdamp(0).h(200).s(1).l(0.5).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(false).sensor(true).links("").code_i("step = (step + 10)%160;").code_f("");
-let _ = spawn(13).x(50).y(270).ry(13).rot(1.3952327).mass(0).inertia(1).vx(0).vy(0).va(1.5707964).restitution(0.5).lindamp(0).angdamp(0).h(330).s(1).l(0.5).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(true).sensor(false).links("va < TAU/4").code_i("").code_f("");
-let _ = spawn(1).x(90).y(237.81296).ry(1).rot(-0).mass(0).inertia(1).vx(0).vy(0).va(0).restitution(0.5).lindamp(0).angdamp(0).h(0).s(1).l(1).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(true).sensor(false).links("x < step").code_i("$other.l($other.l+0.3)").code_f("$other.l($other.l-0.3)");
+let _ = spawn(2).x(63.90123).y(50).ry(2).rot(-0).mass(0).inertia(10).vx(0).vy(0).va(0).restitution(0.5).lindamp(0).angdamp(0).h(200).s(1).l(0.5).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(false).sensor(true).links("").code_i("").code_f("");
+let _ = spawn(13).x(50).y(50).ry(13).rot(1.3952327).mass(0).inertia(1).vx(0).vy(0).va(1.5707964).restitution(0.5).lindamp(0).angdamp(0).h(330).s(1).l(0.5).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(true).sensor(false).links("va < TAU/4").code_i("step = (step + 10)%160;").code_f("");
+let _ = spawn(1).x(90).y(2.5).ry(1).rot(-0).mass(0).inertia(1).vx(0).vy(0).va(0).restitution(0.5).lindamp(0).angdamp(0).h(0).s(1).l(1).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(true).sensor(false).links("x < step").code_i("$other.l($other.l+0.3)").code_f("$other.l($other.l-0.3)");
 
 for i in 0..16 {
-let _ = spawn(2).x(i*10).y(235.99106).ry(2).rot(-0).mass(0).inertia(1).vx(0).vy(0).va(0).restitution(0.5).lindamp(0).angdamp(0).h(i/16*360).s(1).l(0.2).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(false).sensor(true).links("").code_i("").code_f("");
+let _ = spawn(2).x(i*10).y(0).ry(2).rot(-0).mass(0).inertia(1).vx(0).vy(0).va(0).restitution(0.5).lindamp(0).angdamp(0).h(i/16*360).s(1).l(0.2).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(false).sensor(true).links("").code_i("").code_f("");
 }
-
-// 250115
-let t = [0, 6, 8, 16, 5, 14, 7, 2];
-let seed = 0;
-t = [4, 1, 2, 3, 5, 14, 19, 13];
-// code_i
-seed += 1;
-let l = rnd1(seed) * 8;
-$id.layer(l).h($other.h);
-n = t[$other.layer];
-let note = (scale[n%slen] + 0)/12;
-let oct = (n/slen).floor() % 2 +  2;
-let f = midc * exp2(note + oct);
-seq.push_relative(
-    0, 0.7, Fade::Smooth, 0, 0.01,
-    brown() >> pluck(f, 14.7, 0.4)*0.4
-);
-// code_f
-$id.vx(0).vy(0);
 
 // 250119
 let _ = spawn(23.737732).x(23.214722).y(7.617689).ry(23.737732).rot(-0).mass(13375.735).inertia(13375.735).vx(0).vy(0).va(0).restitution(0.5).lindamp(0).angdamp(0).h(322.17392).s(1).l(0.5490196).a(1).sides(6).cmx(0).cmy(0).friction(0.5).tail(0).layer(1).dynamic(false).sensor(false).links("").code_i("").code_f("");
