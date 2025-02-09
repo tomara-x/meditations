@@ -52,6 +52,27 @@ seq.push_relative(
     sine_hz(f)
 );
 
+// borb
+let seq = Sequencer::new(false, 1);
+let g = seq.backend() >> pan(0);
+g.play();
+for i in 0..20 {
+	let r = rnd1(i);
+	seq.push_relative(
+		r*0.1, r*0.1+0.02, Fade::Smooth, 0.001, 0.001,
+		sine_hz(lerp(r, 400, 2000))
+	);
+}
+//sine_hz(lerp(r, 470, 3000))
+//sine_hz(lerp(r, 470, 8000))
+for i in 0..10 {
+	let r = rnd1(i);
+	seq.push_relative(
+		r*0.2, r*0.4+0.02, Fade::Smooth, 0.001, 0.001,
+		sine_hz(lerp(r, 470, 8000))
+	);
+}
+
 // 250124
 let step = 0;
 let _ = spawn(2).x(63.90123).y(50).ry(2).rot(-0).mass(0).inertia(10).vx(0).vy(0).va(0).restitution(0.5).lindamp(0).angdamp(0).h(200).s(1).l(0.5).a(1).sides(4).cmx(0).cmy(0).friction(0.5).tail(0).layer(0).dynamic(false).sensor(true).links("").code_i("").code_f("");
