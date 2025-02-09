@@ -1,4 +1,6 @@
-//bgawk https://github.com/tomara-x/bgawk
+//bgawk
+
+// with sensor (in draw settings) turned on
 let h = [];
 let l = [];
 let th = [];
