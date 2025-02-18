@@ -1,6 +1,6 @@
 // lapis
 let bpm = 115;
-let bar = 60 / bpm;
+let beat = 60 / bpm;
 
 let midc = 440 * exp2(-9/12);
 
