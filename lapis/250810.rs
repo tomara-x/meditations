@@ -23,10 +23,10 @@ let i = lerp(0, 36, rnd1(s2));
 q.tick([i], o);
 
 seq.push_relative(
-  0,0.1,
+  0,0.6,
   Fade::Smooth,
-  0.01, 0.01,
-  organ_hz(midc * exp2(o[0]/12) / 2) * 0.1
+  0.01, 0.6,
+  organ_hz(midc * exp2(o[0]/12) / 4) * 0.1
 );").code_f("");
 let e3 = spawn(6.407837).x(-133.26123).y(-60.232674).z(0).ry(6.407837).rot(2.4955473).mass(263.1082).inertia(263.1082).vx(-197.46211).vy(-636.4142).va(439.83603).restitution(0.95).lindamp(0).angdamp(0).h(0.71428573).s(1).l(0.8352941).a(1).sides(32).cmx(0).cmy(0).friction(0).tail(90).layer(0).dynamic(true).sensor(false).links("").code_i("s1 += 1;
 let i = lerp(0, 36, rnd1(s1));
