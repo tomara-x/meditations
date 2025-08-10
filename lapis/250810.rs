@@ -6,6 +6,9 @@ g.play();
 let s1 = 0;
 let s2 = 0;
 
+let c = 0;
+let s3 = 0;
+
 let q = quantizer([0,1,4,5,7,8,11, 12]);
 let o = [];
 
@@ -17,6 +20,17 @@ e3.h(e1.h);
 e1.l(e2.l);
 e2.l(e3.l);
 e3.l(e1.l);
+
+c += 1;
+if c > 4 {
+  c = 0;
+  s3 += 1;
+  $id
+    .x(lerp(-200, 200, rnd1(s3)))
+    .y(lerp(-200, 200, rnd2(s3)));
+  e2.vx(0).vy(0);
+  e3.vx(0).vy(0);
+}
 ").code_f("");
 let e2 = spawn(7.056332).x(-98.76889).y(-155.83301).z(0).ry(7.056332).rot(-0.6896148).mass(351.34766).inertia(351.34766).vx(296.98438).vy(101.42469).va(-149.56653).restitution(0.95).lindamp(0).angdamp(0).h(200).s(1).l(0.6352941).a(1).sides(32).cmx(0).cmy(0).friction(0.5).tail(90).layer(0).dynamic(true).sensor(false).links("").code_i("s2 += 1;
 let i = lerp(0, 36, rnd1(s2));
