@@ -4,18 +4,18 @@ g.play();
 
 let t = 1;
 
-let subsubsub2 = unsteady_no_reset([t/4/3], true)
+let subsubsub2 = unsteady_nr([t/4/3], true)
 >> step(
     cymbal(1) * 0.1,
 );
 
-let subsubsub1 = unsteady_no_reset([t/8], true)
+let subsubsub1 = unsteady_nr([t/8], true)
 >> step(
     cymbal(1) * 0.1,
     soft_saw_hz(220),
 );
 
-let subsub = unsteady_no_reset([t/4], true)
+let subsub = unsteady_nr([t/4], true)
 >> step(
     cymbal(1) * 0.1,
     dc(0),
@@ -23,7 +23,7 @@ let subsub = unsteady_no_reset([t/4], true)
     subsubsub2,
 );
 
-let sub1 = unsteady_no_reset([t/4], true)
+let sub1 = unsteady_nr([t/4], true)
 >> step(
     bassdrum(0.5, 1000, 80),
     bassdrum(0.5, 1000, 80),
@@ -34,7 +34,7 @@ let sub1 = unsteady_no_reset([t/4], true)
     subsub,
 );
 
-let sub2 = unsteady_no_reset([t/2], true)
+let sub2 = unsteady_nr([t/2], true)
 >> step(
     organ_hz(1100) * ahr(0.002, 0, 0.1),
     bassdrum(0.5, 4000, 80),
